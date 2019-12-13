@@ -28,7 +28,7 @@ deploy2:
 
 test:
 	ip=$(kubectl get svc -o=custom-columns=IP:.status.loadBalancer.ingress[].ip --no-headers)
-	curl $ip
+	curl ${ip}
 	
 end:
 	@echo Going to delete all objects created in "${ns}"" namespace.
