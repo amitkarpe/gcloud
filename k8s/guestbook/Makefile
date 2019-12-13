@@ -22,6 +22,7 @@ deploy:
 	kubectl create -f     redis-slave-service.yaml
 	kubectl create -f     frontend-deployment.yaml
 	kubectl create -f     frontend-service.yaml
+	kubectl get pod -w
 
 service:
 	kubectl get svc
