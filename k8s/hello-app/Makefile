@@ -1,14 +1,16 @@
 # Source: https://cloud.google.com/kubernetes-engine/docs/quickstart
 # Idea to demonstrate GKE
 
-check:
-	kubectl get all
-
+ns=hello-app
 ns:
 	@echo create new namespace and do all operation within that namespace
-	kubectl create ns hello
+	kubectl create ns ${ns}
 	kubectl config set-context --current --namespace=gb
 	kubectl config view --minify | grep namespace:
+
+check:
+	kubectl get all -n ${ns}
+
 
 
 deploy1:
@@ -24,3 +26,7 @@ deploy2:
 	kubectl expose deployment hello-server --type LoadBalancer --port 80 --target-port 8080
 	kubectl get service hello-server -w
 	kubectl get pods
+	
+end:
+	@echo Going to delete all objects created in "gb" namespace.
+	kubectl delete ns ${ns} --v=2
