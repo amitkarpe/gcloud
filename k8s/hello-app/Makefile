@@ -27,8 +27,7 @@ deploy2:
 	kubectl get pods
 
 test:
-	ip=$(kubectl get svc -o=custom-columns=IP:.status.loadBalancer.ingress[].ip --no-headers)
-	curl ${ip}
+	curl $(kubectl get svc -o=custom-columns=IP:.status.loadBalancer.ingress[].ip --no-headers)
 	
 end:
 	@echo Going to delete all objects created in "${ns}"" namespace.
