@@ -9,6 +9,11 @@ list:
 	@echo kubectl create -f     frontend-deployment.yaml
 	@echo kubectl create -f     frontend-service.yaml
 
+ns:
+	@echo create new namespace and do all operation within that namespace
+	kubectl create ns gb
+	kubectl config set-context --current --namespace=gb
+	kubectl config view --minify | grep namespace:
 
 deploy:
 	kubectl create -f  redis-master-deployment.yaml
