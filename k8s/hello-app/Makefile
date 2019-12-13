@@ -19,13 +19,16 @@ deploy1:
 	kubectl get service hello-server -w
 	kubectl get pods
 
-
 deploy2:
 	kubectl delete deployment,svc hello-server
 	kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:2.0
 	kubectl expose deployment hello-server --type LoadBalancer --port 80 --target-port 8080
 	kubectl get service hello-server -w
 	kubectl get pods
+
+test:
+	ip=$(kubectl get svc -o=custom-columns=IP:.status.loadBalancer.ingress[].ip --no-headers)
+	curl $ip
 	
 end:
 	@echo Going to delete all objects created in "${ns}"" namespace.
