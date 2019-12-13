@@ -5,7 +5,7 @@ ns=hello-app
 ns:
 	@echo create new namespace and do all operation within that namespace
 	kubectl create ns ${ns}
-	kubectl config set-context --current --namespace=gb
+	kubectl config set-context --current --namespace=${ns}
 	kubectl config view --minify | grep namespace:
 
 check:
@@ -28,5 +28,5 @@ deploy2:
 	kubectl get pods
 	
 end:
-	@echo Going to delete all objects created in "gb" namespace.
+	@echo Going to delete all objects created in "${ns}"" namespace.
 	kubectl delete ns ${ns} --v=2
