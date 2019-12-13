@@ -22,8 +22,9 @@ service:
 	kubectl get svc
 
 lb:
-	kubectl delete -f  frontend-service.yaml
-	sed -i -e     's/NodePort/LoadBalancer/g'     frontend-service.yaml
-	kubectl create -f  frontend-service.yaml
+	kubectl delete -f  frontend-service.yaml | echo "Confirmed that frontend service is not exist."
+	cp  frontend-service.yaml lb-frontend-service.yaml
+	sed -i -e     's/NodePort/LoadBalancer/g' lb-frontend-service.yaml
+	kubectl create -f  lb-frontend-service.yaml
 	kubectl get svc frontend -w
 
