@@ -34,3 +34,7 @@ lb:
 	kubectl create -f  lb-frontend-service.yaml
 	kubectl get svc frontend -w
 
+end:
+	@echo Going to delete all objects created in "gb" namespace.
+	kubectl delete all --all -n gb --v=2
+	kubectl delete ns gb --v=2
